@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dead Dreams Society | The Vault</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=La+Belle+Aurore&display=swap');
+
+        :root {
+            --ink: #1a1a1a;
+            --paper: #c9c0b3;
+            --accent: #5e1914; 
+            --accent-hover: #7a211a;
+            --overlay: rgba(0, 0, 0, 0.6); 
+        }
+
+        html, body {
+            margin: 0; 
+            padding: 0; 
+            height: 100%;
+            font-family: 'EB Garamond', serif;
+            color: #eee;
+            background: linear-gradient(var(--overlay), var(--overlay)), 
+                        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2000');
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            flex: 1 0 auto;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            position: relative; 
+            z-index: 1;
+            width: 100%;
+        }
+
+        .view { display: none; width: 100%; animation: fadeIn 0.8s ease; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        h1 { font-size: 3.5rem; letter-spacing: 5px; text-align: center; margin: 8vh 0 10px; font-weight: 400; text-transform: uppercase; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+        .motto { font-style: italic; color: #ccc; text-align: center; margin-bottom: 20px; font-size: 1.2rem; text-shadow: 1px 1px 5px #000; }
+        .main-quote { max-width: 600px; text-align: center; line-height: 1.6; font-size: 1.4rem; color: #ddd; margin: 0 auto 50px auto; font-style: italic; text-shadow: 1px 1px 8px #000; }
+
+        .vault-controls { 
+            width: 100%; 
+            max-width: 1000px; 
+            margin: 60px auto 40px auto; 
+            display: flex;
+            justify-content: center;
+        }
+        
+        .vault-nav { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            gap: 30px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            padding: 0 20px 15px 20px; 
+            width: fit-content;
+            flex-wrap: wrap; 
+        }
+
+        .nav-link { 
+            font-family: 'Courier Prime', monospace; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            color: #fff; 
+            opacity: 0.85; 
+            cursor: pointer; 
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover { opacity: 1; color: #fff; }
+
+        .nav-link.active { 
+            color: #ff4d4d; 
+            opacity: 1;
+            text-decoration: line-through; 
+            font-weight: bold;
+        }
+
+        .btn-row { display: flex; gap: 30px; justify-content: center; margin-top: 20px;}
+        .outline-btn {
+            background: rgba(0,0,0,0.5); border: 1px solid #444; color: #ccc;
+            padding: 15px 35px; text-transform: uppercase; font-size: 0.8rem;
+            letter-spacing: 3px; cursor: pointer; transition: 0.5s; font-family: 'Courier Prime', monospace;
+            backdrop-filter: blur(2px);
+        }
+        .outline-btn:hover { border-color: var(--accent); color: #fff; background: rgba(94, 25, 20, 0.2); }
+
+        .archive-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px; width: 100%; max-width: 1200px; margin: 0 auto;
+        }
+        .archive-card { border: 1px solid #222; padding: 20px; background: rgba(15,15,15,0.85); cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
+        .archive-card:hover { border-color: var(--accent); background: rgba(25,25,25,0.95); }
+        .card-label { color: var(--accent); font-family: 'Courier Prime', monospace; font-size: 0.6rem; text-transform: uppercase; display: block; }
+        .card-title { margin: 5px 0 0 0; font-size: 1.3rem; font-weight: normal; color: #ddd; }
+
+        .manuscript {
+            background: #d2c5b3; color: #222; padding: 60px;
+            max-width: 700px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            background-image: url('https://www.transparenttextures.com/patterns/felt.png');
+            border-radius: 2px;
+        }
+        .manuscript h2 { font-family: 'La Belle Aurore', cursive; font-size: 2.2rem; text-align: center; margin-bottom: 30px; color: var(--accent); }
+        .manuscript label { font-family: 'Courier Prime', monospace; font-size: 0.7rem; text-transform: uppercase; opacity: 0.8; display: block; margin-top: 15px; }
+        
+        .manuscript input, .manuscript select, .manuscript textarea {
+            width: 100%; background: transparent; border: none; 
+            border-bottom: 1px solid rgba(0,0,0,0.4);
+            color: rgba(26, 26, 26, 0.9);
+            padding: 8px 0; font-family: 'EB Garamond', serif; font-size: 1.1rem; outline: none; margin-bottom: 10px;
+        }
+        .manuscript input::placeholder, .manuscript textarea::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .seal-btn {
+            margin-top: 30px; width: 100%; padding: 15px; background: var(--accent); color: #fff;
+            border: none; font-family: 'Courier Prime', monospace; text-transform: uppercase; cursor: pointer; letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .seal-btn:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 5px 15px rgba(94, 25, 20, 0.4);
+            letter-spacing: 3px;
+        }
+
+        #dossier-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.96); z-index: 100; display: none; justify-content: center; align-items: center;
+        }
+        .dossier-paper {
+            background-color: var(--paper); color: var(--ink); width: 85%; max-width: 750px; height: 80vh;
+            padding: 50px; position: relative; overflow-y: auto; background-image: url('https://www.transparenttextures.com/patterns/felt.png');
+            font-family: 'Courier Prime', monospace; box-shadow: 0 0 60px rgba(0,0,0,1);
+        }
+        .close-dossier { position: absolute; top: 20px; left: 30px; font-size: 1.2rem; cursor: pointer; color: var(--ink); text-decoration: underline; }
+
+        /* UPDATED FOOTER: FULL BACKGROUND & HIGHER OPACITY */
+        .dds-footer { 
+            flex-shrink: 0;
+            width: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            background: transparent; /* Removed the black box */
+            padding: 20px 0; 
+            border-top: 1px solid rgba(255,255,255,0.3); /* Increased border opacity */
+        }
+        .footer-title { font-size: 11px; letter-spacing: 0.6px; margin-bottom: 1px; color: #fff; opacity: 0.8; } /* Increased opacity */
+        .footer-quote { font-size: 12px; margin-top: 0; font-style: italic; color: #fff; opacity: 0.7; } /* Increased opacity */
+        /* Replace your existing @media or add this at the end of your <style> tag */
+@media (max-width: 600px) {
+    h1 { font-size: 2.2rem; margin-top: 4vh; }
+    .manuscript { padding: 30px 20px; width: 90%; }
+    .vault-nav { gap: 15px; }
+    .dossier-paper { width: 95%; padding: 25px; height: 90vh; }
+}   
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="view-home" class="view active">
+            <h1>Dead Dreams Society</h1>
+            <p class="motto">Winners, until they weren't.</p>
+            <p class="main-quote">“Most dreams don’t die loudly.<br>They disappear quietly through fear, timing, money, or silence.”</p>
+            <div class="btn-row">
+                <button class="outline-btn" onclick="showView('view-submit')">Seal a Record</button>
+                <button class="outline-btn" onclick="showView('view-archive')">The Vault</button>
+            </div>
+        </div>
+
+        <div id="view-submit" class="view">
+            <div class="manuscript">
+                <h2>An Autopsy of Ambition</h2>
+                <form id="adminForm">
+                    <label>Classification</label>
+                    <select id="cat" required>
+                        <option value="Business">Business</option>
+                        <option value="Career">Career</option>
+                        <option value="Health">Health</option>
+                        <option value="Relationship">Relationship</option>
+                        <option value="Others">Others</option>
+                    </select>
+                    <input type="text" id="dream" placeholder="Subject: the dream" required>
+                    <input type="text" id="decision" placeholder="Fatal decision" required>
+                    <textarea id="next" placeholder="Aftermath" rows="2"></textarea>
+                    <input type="text" id="cost" placeholder="Price paid">
+                    <input type="text" id="misjudged" placeholder="Misjudgement">
+                    <input type="text" id="wish" placeholder="One sentence warning">
+                    <button type="submit" class="seal-btn" id="submitBtn">Seal the Record</button>
+                </form>
+                <p style="text-align: center; cursor: pointer; text-decoration: underline; margin-top: 20px;" onclick="showView('view-home')">burn page</p>
+            </div>
+        </div>
+
+        <div id="view-archive" class="view">
+            <h1>The Vault</h1>
+            <div class="vault-controls">
+                <div class="vault-nav">
+                    <span class="nav-link active" onclick="setFilter('All', this)">All</span>
+                    <span class="nav-link" onclick="setFilter('Business', this)">Business</span>
+                    <span class="nav-link" onclick="setFilter('Career', this)">Career</span>
+                    <span class="nav-link" onclick="setFilter('Health', this)">Health</span>
+                    <span class="nav-link" onclick="setFilter('Relationship', this)">Relationship</span>
+                    <span class="nav-link" onclick="setFilter('Others', this)">Others</span>
+                </div>
+            </div>
+            <div class="archive-grid" id="grid"></div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="outline-btn" onclick="showView('view-home')">Exit Vault</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dossier-overlay">
+        <div class="dossier-paper">
+            <span class="close-dossier" onclick="closeDossier()">close file</span>
+            <div id="dossier-body" style="margin-top:40px;"></div>
+        </div>
+    </div>
+
+    <footer class="dds-footer">
+        <p class="footer-title">© Dead Dreams Society · est. 2026</p>
+        <p class="footer-quote">“Carpe Diem — but tell the truth.”</p>
+    </footer>
+
+    <script>
+        const SB_URL = 'https://kkuvlqlveamqgydokbgw.supabase.co'; 
+        const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtrdXZscWx2ZWFtcWd5ZG9rYmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4MDIxMDYsImV4cCI6MjA4MzM3ODEwNn0.m6QwDYSL3APCualrkpWIboY5Dii2-NSA_U_TqCepwOA';
+        const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
+
+        let records = [];
+        let currentCat = 'All';
+
+        async function fetchRecords() {
+            const { data, error } = await supabaseClient.from('vault').select('*').eq('is_published', true).order('created_at', { ascending: false });
+            if (!error) { records = data; renderFiltered(); }
+        }
+
+        function showView(id) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(id === 'view-archive') fetchRecords();
+        }
+
+        function setFilter(cat, el) {
+            currentCat = cat;
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            el.classList.add('active');
+            renderFiltered();
+        }
+
+        function renderFiltered() {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = records.filter(i => (currentCat === 'All' || i.cat === currentCat))
+                .map(i => `<div class="archive-card" onclick="openDossier('${i.id}')"><span class="card-label">${i.cat}</span><h3 class="card-title">${i.dream}</h3></div>`).join('');
+        }
+
+        function openDossier(id) {
+            const i = records.find(r => r.id === id);
+            document.getElementById('dossier-body').innerHTML = `<h2>RECORD: ${i.dream}</h2><p><b>Pivot:</b> ${i.decision}</p><p><b>Price:</b> ${i.cost}</p><div style="border:2px solid var(--accent); padding:20px; margin-top:30px;"><i>"${i.wish}"</i></div>`;
+            document.getElementById('dossier-overlay').style.display = 'flex';
+        }
+
+        function closeDossier() { document.getElementById('dossier-overlay').style.display = 'none'; }
+
+        document.getElementById('adminForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const entry = { cat: document.getElementById('cat').value, dream: document.getElementById('dream').value, decision: document.getElementById('decision').value, next: document.getElementById('next').value, cost: document.getElementById('cost').value, misjudged: document.getElementById('misjudged').value, wish: document.getElementById('wish').value, is_published: false };
+            const { error } = await supabaseClient.from('vault').insert([entry]);
+            if (!error) { alert("Submitted for review."); showView('view-home'); this.reset(); }
+        };
+    </script>
+</body>
+</html>
