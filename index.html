@@ -11,39 +11,23 @@
         :root {
             --ink: #1a1a1a;
             --paper: #c9c0b3;
+            --folder: #bdaa8d; 
             --accent: #5e1914; 
             --accent-hover: #7a211a;
-            --overlay: rgba(0, 0, 0, 0.6); 
+            --overlay: rgba(0, 0, 0, 0.7); 
         }
 
         html, body {
-            margin: 0; 
-            padding: 0; 
-            height: 100%;
-            font-family: 'EB Garamond', serif;
-            color: #eee;
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'EB Garamond', serif; color: #eee;
             background: linear-gradient(var(--overlay), var(--overlay)), 
                         url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2000');
-            background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-color: #000;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
+            background-size: cover; background-position: center; background-attachment: fixed;
+            background-repeat: no-repeat; background-color: #000;
+            display: flex; flex-direction: column; overflow-x: hidden;
         }
 
-        .container {
-            flex: 1 0 auto;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
-            position: relative; 
-            z-index: 1;
-            width: 100%;
-        }
-
+        .container { flex: 1 0 auto; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; width: 100%; }
         .view { display: none; width: 100%; animation: fadeIn 0.8s ease; }
         .view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -52,126 +36,62 @@
         .motto { font-style: italic; color: #ccc; text-align: center; margin-bottom: 20px; font-size: 1.2rem; text-shadow: 1px 1px 5px #000; }
         .main-quote { max-width: 600px; text-align: center; line-height: 1.6; font-size: 1.4rem; color: #ddd; margin: 0 auto 50px auto; font-style: italic; text-shadow: 1px 1px 8px #000; }
 
-        .vault-controls { 
-            width: 100%; 
-            max-width: 1000px; 
-            margin: 60px auto 40px auto; 
-            display: flex;
-            justify-content: center;
-        }
-        
-        .vault-nav { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            gap: 30px; 
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
-            padding: 0 20px 15px 20px; 
-            width: fit-content;
-            flex-wrap: wrap; 
-        }
-
-        .nav-link { 
-            font-family: 'Courier Prime', monospace; 
-            font-size: 0.85rem; 
-            text-transform: uppercase; 
-            color: #fff; 
-            opacity: 0.85; 
-            cursor: pointer; 
-            letter-spacing: 3px;
-            transition: all 0.3s ease;
-        }
-        
+        .vault-controls { width: 100%; max-width: 1000px; margin: 60px auto 40px auto; display: flex; justify-content: center; }
+        .vault-nav { display: flex; justify-content: center; align-items: center; gap: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 0 20px 15px 20px; width: fit-content; flex-wrap: wrap; }
+        .nav-link { font-family: 'Courier Prime', monospace; font-size: 0.85rem; text-transform: uppercase; color: #fff; opacity: 0.85; cursor: pointer; letter-spacing: 3px; transition: all 0.3s ease; }
         .nav-link:hover { opacity: 1; color: #fff; }
-
-        .nav-link.active { 
-            color: #ff4d4d; 
-            opacity: 1;
-            text-decoration: line-through; 
-            font-weight: bold;
-        }
+        .nav-link.active { color: #ff4d4d; opacity: 1; text-decoration: line-through; font-weight: bold; }
 
         .btn-row { display: flex; gap: 30px; justify-content: center; margin-top: 20px;}
-        .outline-btn {
-            background: rgba(0,0,0,0.5); border: 1px solid #444; color: #ccc;
-            padding: 15px 35px; text-transform: uppercase; font-size: 0.8rem;
-            letter-spacing: 3px; cursor: pointer; transition: 0.5s; font-family: 'Courier Prime', monospace;
-            backdrop-filter: blur(2px);
-        }
+        .outline-btn { background: rgba(0,0,0,0.5); border: 1px solid #444; color: #ccc; padding: 15px 35px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; cursor: pointer; transition: 0.5s; font-family: 'Courier Prime', monospace; backdrop-filter: blur(2px); }
         .outline-btn:hover { border-color: var(--accent); color: #fff; background: rgba(94, 25, 20, 0.2); }
 
-        .archive-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px; width: 100%; max-width: 1200px; margin: 0 auto;
-        }
+        .archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; width: 100%; max-width: 1200px; margin: 0 auto; padding-bottom: 50px; }
         .archive-card { border: 1px solid #222; padding: 20px; background: rgba(15,15,15,0.85); cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
         .archive-card:hover { border-color: var(--accent); background: rgba(25,25,25,0.95); }
         .card-label { color: var(--accent); font-family: 'Courier Prime', monospace; font-size: 0.6rem; text-transform: uppercase; display: block; }
         .card-title { margin: 5px 0 0 0; font-size: 1.3rem; font-weight: normal; color: #ddd; }
 
-        .manuscript {
-            background: #d2c5b3; color: #222; padding: 60px;
-            max-width: 700px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.5);
-            background-image: url('https://www.transparenttextures.com/patterns/felt.png');
-            border-radius: 2px;
-        }
+        .manuscript { background: #d2c5b3; color: #111; padding: 60px; max-width: 700px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.5); background-image: url('https://www.transparenttextures.com/patterns/felt.png'); border-radius: 2px; }
         .manuscript h2 { font-family: 'La Belle Aurore', cursive; font-size: 2.2rem; text-align: center; margin-bottom: 30px; color: var(--accent); }
-        .manuscript label { font-family: 'Courier Prime', monospace; font-size: 0.7rem; text-transform: uppercase; opacity: 0.8; display: block; margin-top: 15px; }
         
-        .manuscript input, .manuscript select, .manuscript textarea {
-            width: 100%; background: transparent; border: none; 
-            border-bottom: 1px solid rgba(0,0,0,0.4);
-            color: rgba(26, 26, 26, 0.9);
-            padding: 8px 0; font-family: 'EB Garamond', serif; font-size: 1.1rem; outline: none; margin-bottom: 10px;
-        }
-        .manuscript input::placeholder, .manuscript textarea::placeholder {
-            color: rgba(0, 0, 0, 0.5);
-        }
+        /* Form Opacity Increases */
+        .manuscript label { font-family: 'Courier Prime', monospace; font-size: 0.75rem; text-transform: uppercase; color: #000; opacity: 1; display: block; margin-top: 15px; font-weight: bold; }
+        .manuscript input, .manuscript select, .manuscript textarea { width: 100%; background: transparent; border: none; border-bottom: 1.5px solid rgba(0,0,0,0.7); color: #000; padding: 8px 0; font-family: 'EB Garamond', serif; font-size: 1.2rem; outline: none; margin-bottom: 10px; opacity: 1; }
+        .manuscript input::placeholder, .manuscript textarea::placeholder { color: rgba(0, 0, 0, 0.6); }
         
-        .seal-btn {
-            margin-top: 30px; width: 100%; padding: 15px; background: var(--accent); color: #fff;
-            border: none; font-family: 'Courier Prime', monospace; text-transform: uppercase; cursor: pointer; letter-spacing: 2px;
-            transition: all 0.3s ease;
-        }
+        .seal-btn { margin-top: 30px; width: 100%; padding: 15px; background: var(--accent); color: #fff; border: none; font-family: 'Courier Prime', monospace; text-transform: uppercase; cursor: pointer; letter-spacing: 2px; transition: all 0.3s ease; font-weight: bold; }
+        .seal-btn:hover { background: var(--accent-hover); box-shadow: 0 5px 15px rgba(94, 25, 20, 0.4); letter-spacing: 3px; }
 
-        .seal-btn:hover {
-            background: var(--accent-hover);
-            box-shadow: 0 5px 15px rgba(94, 25, 20, 0.4);
-            letter-spacing: 3px;
-        }
+        #dossier-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100; display: none; justify-content: center; align-items: center; }
+        .dossier-folder { position: relative; width: 90%; max-width: 700px; height: 85vh; display: flex; flex-direction: column; }
+        .folder-tab { width: 180px; height: 40px; background-color: var(--folder); border-radius: 10px 40px 0 0; position: absolute; top: -39px; left: 0; display: flex; align-items: center; padding-left: 20px; font-family: 'Courier Prime', monospace; font-size: 0.7rem; color: rgba(0,0,0,0.6); font-weight: bold; border-top: 1px solid rgba(0,0,0,0.1); }
 
-        #dossier-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.96); z-index: 100; display: none; justify-content: center; align-items: center;
-        }
-        .dossier-paper {
-            background-color: var(--paper); color: var(--ink); width: 85%; max-width: 750px; height: 80vh;
-            padding: 50px; position: relative; overflow-y: auto; background-image: url('https://www.transparenttextures.com/patterns/felt.png');
-            font-family: 'Courier Prime', monospace; box-shadow: 0 0 60px rgba(0,0,0,1);
-        }
-        .close-dossier { position: absolute; top: 20px; left: 30px; font-size: 1.2rem; cursor: pointer; color: var(--ink); text-decoration: underline; }
+        .dossier-paper { background-color: var(--folder); color: var(--ink); height: 100%; padding: 50px; position: relative; overflow-y: auto; background-image: url('https://www.transparenttextures.com/patterns/felt.png'); font-family: 'Courier Prime', monospace; box-shadow: 0 30px 60px rgba(0,0,0,0.8); border: 1px solid rgba(0,0,0,0.1); border-radius: 0 4px 4px 4px; display: flex; flex-direction: column; }
+        
+        .close-dossier { position: absolute; top: 20px; right: 30px; font-size: 0.8rem; cursor: pointer; color: var(--accent); font-weight: bold; border: 1px solid var(--accent); padding: 5px 10px; transition: 0.3s; z-index: 10; }
+        .close-dossier:hover { background: var(--accent); color: #fff; }
 
-        /* UPDATED FOOTER: FULL BACKGROUND & HIGHER OPACITY */
-        .dds-footer { 
-            flex-shrink: 0;
-            width: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            background: transparent; /* Removed the black box */
-            padding: 20px 0; 
-            border-top: 1px solid rgba(255,255,255,0.3); /* Increased border opacity */
+        .dossier-entry { margin-bottom: 25px; }
+        .dossier-label { font-weight: bold; font-size: 0.7rem; text-transform: uppercase; color: rgba(0,0,0,0.5); display: block; margin-bottom: 4px; border-bottom: 1px solid rgba(0,0,0,0.1); width: fit-content; }
+        .dossier-text { font-family: 'Courier Prime', monospace; font-size: 1.1rem; color: #111; padding-left: 5px; }
+        
+        /* Special sizing for Dream field */
+        .dream-text { font-size: 1.155rem !important; font-weight: bold; }
+
+        .stamp { align-self: flex-end; width: 120px; height: 50px; border: 3px solid #5e1914; color: #5e1914; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; transform: rotate(-5deg); opacity: 0.6; pointer-events: none; border-radius: 4px; margin-top: 30px; margin-bottom: 20px; }
+
+        .dds-footer { flex-shrink: 0; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: transparent; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.3); }
+        .footer-title { font-size: 11px; letter-spacing: 0.6px; margin-bottom: 1px; color: #fff; opacity: 0.8; } 
+        .footer-quote { font-size: 12px; margin-top: 0; font-style: italic; color: #fff; opacity: 0.7; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; margin-top: 4vh; }
+            .manuscript { padding: 30px 20px; width: 90%; box-sizing: border-box; }
+            .vault-nav { gap: 15px; }
+            .dossier-paper { padding: 30px 20px; }
+            .stamp { width: 100px; font-size: 1rem; height: 40px; }
         }
-        .footer-title { font-size: 11px; letter-spacing: 0.6px; margin-bottom: 1px; color: #fff; opacity: 0.8; } /* Increased opacity */
-        .footer-quote { font-size: 12px; margin-top: 0; font-style: italic; color: #fff; opacity: 0.7; } /* Increased opacity */
-        /* Replace your existing @media or add this at the end of your <style> tag */
-@media (max-width: 600px) {
-    h1 { font-size: 2.2rem; margin-top: 4vh; }
-    .manuscript { padding: 30px 20px; width: 90%; }
-    .vault-nav { gap: 15px; }
-    .dossier-paper { width: 95%; padding: 25px; height: 90vh; }
-}   
     </style>
 </head>
 <body>
@@ -199,15 +119,16 @@
                         <option value="Relationship">Relationship</option>
                         <option value="Others">Others</option>
                     </select>
-                    <input type="text" id="dream" placeholder="Subject: the dream" required>
-                    <input type="text" id="decision" placeholder="Fatal decision" required>
-                    <textarea id="next" placeholder="Aftermath" rows="2"></textarea>
-                    <input type="text" id="cost" placeholder="Price paid">
-                    <input type="text" id="misjudged" placeholder="Misjudgement">
-                    <input type="text" id="wish" placeholder="One sentence warning">
+                    <input type="text" id="dream" placeholder="the Dream" required>
+                    <input type="text" id="decision" placeholder="The Decision" required>
+                    <textarea id="next" placeholder="What Happened Next" rows="2" required></textarea>
+                    <input type="text" id="misjudged" placeholder="Where It Failed" required>
+                    <input type="text" id="cost" placeholder="The Cost" required>
+                    <input type="text" id="misjudged_field" placeholder="The Thing I Misjudged" required>
+                    <input type="text" id="wish" placeholder="One Sentence I Wish I’d Heard Earlier" required>
                     <button type="submit" class="seal-btn" id="submitBtn">Seal the Record</button>
                 </form>
-                <p style="text-align: center; cursor: pointer; text-decoration: underline; margin-top: 20px;" onclick="showView('view-home')">burn page</p>
+                <p style="text-align: center; cursor: pointer; text-decoration: underline; margin-top: 20px; color: var(--ink); font-family: 'Courier Prime', monospace; font-size: 0.8rem; font-weight:bold;" onclick="showView('view-home')">BURN_PAGE</p>
             </div>
         </div>
 
@@ -231,9 +152,13 @@
     </div>
 
     <div id="dossier-overlay">
-        <div class="dossier-paper">
-            <span class="close-dossier" onclick="closeDossier()">close file</span>
-            <div id="dossier-body" style="margin-top:40px;"></div>
+        <div class="dossier-folder">
+            <div class="folder-tab" id="folder-id-tab">FILE_NO: 000</div>
+            <div class="dossier-paper">
+                <span class="close-dossier" onclick="closeDossier()">CLOSE_FILE</span>
+                <div id="dossier-body" style="margin-top:20px;"></div>
+                <div class="stamp">ARCHIVED</div>
+            </div>
         </div>
     </div>
 
@@ -276,7 +201,20 @@
 
         function openDossier(id) {
             const i = records.find(r => r.id === id);
-            document.getElementById('dossier-body').innerHTML = `<h2>RECORD: ${i.dream}</h2><p><b>Pivot:</b> ${i.decision}</p><p><b>Price:</b> ${i.cost}</p><div style="border:2px solid var(--accent); padding:20px; margin-top:30px;"><i>"${i.wish}"</i></div>`;
+            document.getElementById('folder-id-tab').innerText = `CAT: ${i.cat.toUpperCase()}`;
+            document.getElementById('dossier-body').innerHTML = `
+                <div class="dossier-entry"><span class="dossier-label">The Dream</span><div class="dossier-text dream-text">${i.dream}</div></div>
+                <div class="dossier-entry"><span class="dossier-label">The Decision</span><div class="dossier-text">${i.decision}</div></div>
+                <div class="dossier-entry"><span class="dossier-label">What Happened Next</span><div class="dossier-text">${i.next}</div></div>
+                <div class="dossier-entry"><span class="dossier-label">Where It Failed</span><div class="dossier-text">${i.misjudged}</div></div>
+                <div class="dossier-entry"><span class="dossier-label">The Cost</span><div class="dossier-text">${i.cost}</div></div>
+                <div class="dossier-entry"><span class="dossier-label">The Thing I Misjudged</span><div class="dossier-text">${i.misjudged_field || i.misjudged}</div></div>
+                
+                <div style="margin-top:50px; border-top: 1px dashed rgba(0,0,0,0.3); padding-top:20px;">
+                    <span class="dossier-label">Final Statement</span>
+                    <div class="dossier-text" style="font-style:italic;">"${i.wish}"</div>
+                </div>
+            `;
             document.getElementById('dossier-overlay').style.display = 'flex';
         }
 
@@ -284,10 +222,20 @@
 
         document.getElementById('adminForm').onsubmit = async function(e) {
             e.preventDefault();
-            const entry = { cat: document.getElementById('cat').value, dream: document.getElementById('dream').value, decision: document.getElementById('decision').value, next: document.getElementById('next').value, cost: document.getElementById('cost').value, misjudged: document.getElementById('misjudged').value, wish: document.getElementById('wish').value, is_published: false };
+            const entry = { 
+                cat: document.getElementById('cat').value, 
+                dream: document.getElementById('dream').value, 
+                decision: document.getElementById('decision').value, 
+                next: document.getElementById('next').value, 
+                cost: document.getElementById('cost').value, 
+                misjudged: document.getElementById('misjudged').value, 
+                misjudged_field: document.getElementById('misjudged_field').value, 
+                wish: document.getElementById('wish').value, 
+                is_published: false 
+            };
             const { error } = await supabaseClient.from('vault').insert([entry]);
             if (!error) { alert("Submitted for review."); showView('view-home'); this.reset(); }
         };
     </script>
 </body>
-</html>
+</html>  
