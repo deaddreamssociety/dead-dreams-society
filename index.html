@@ -55,10 +55,23 @@
         .manuscript { background: #d2c5b3; color: #111; padding: 60px; max-width: 700px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.5); background-image: url('https://www.transparenttextures.com/patterns/felt.png'); border-radius: 2px; }
         .manuscript h2 { font-family: 'La Belle Aurore', cursive; font-size: 2.2rem; text-align: center; margin-bottom: 30px; color: var(--accent); }
         
-        /* Form Opacity Increases */
-        .manuscript label { font-family: 'Courier Prime', monospace; font-size: 0.75rem; text-transform: uppercase; color: #000; opacity: 1; display: block; margin-top: 15px; font-weight: bold; }
-        .manuscript input, .manuscript select, .manuscript textarea { width: 100%; background: transparent; border: none; border-bottom: 1.5px solid rgba(0,0,0,0.7); color: #000; padding: 8px 0; font-family: 'EB Garamond', serif; font-size: 1.2rem; outline: none; margin-bottom: 10px; opacity: 1; }
-        .manuscript input::placeholder, .manuscript textarea::placeholder { color: rgba(0, 0, 0, 0.6); }
+        .manuscript label { font-family: 'Courier Prime', monospace; font-size: 0.75rem; text-transform: uppercase; color: #000; display: block; margin-top: 15px; font-weight: bold; }
+        .manuscript input, .manuscript select, .manuscript textarea { 
+            width: 100%; background: transparent; border: none; 
+            border-bottom: 1.5px solid rgba(0,0,0,0.7); color: #000; 
+            padding: 10px 0; font-family: 'EB Garamond', serif; 
+            font-size: 1.2rem; outline: none; margin-bottom: 15px; 
+            opacity: 1; -webkit-appearance: none; appearance: none;
+        }
+
+        /* Essential Dropdown Effect */
+        .manuscript select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right center;
+            cursor: pointer;
+        }
+
+        .manuscript input::placeholder, .manuscript textarea::placeholder { color: rgba(0, 0, 0, 0.5); }
         
         .seal-btn { margin-top: 30px; width: 100%; padding: 15px; background: var(--accent); color: #fff; border: none; font-family: 'Courier Prime', monospace; text-transform: uppercase; cursor: pointer; letter-spacing: 2px; transition: all 0.3s ease; font-weight: bold; }
         .seal-btn:hover { background: var(--accent-hover); box-shadow: 0 5px 15px rgba(94, 25, 20, 0.4); letter-spacing: 3px; }
@@ -76,7 +89,6 @@
         .dossier-label { font-weight: bold; font-size: 0.7rem; text-transform: uppercase; color: rgba(0,0,0,0.5); display: block; margin-bottom: 4px; border-bottom: 1px solid rgba(0,0,0,0.1); width: fit-content; }
         .dossier-text { font-family: 'Courier Prime', monospace; font-size: 1.1rem; color: #111; padding-left: 5px; }
         
-        /* Special sizing for Dream field */
         .dream-text { font-size: 1.155rem !important; font-weight: bold; }
 
         .stamp { align-self: flex-end; width: 120px; height: 50px; border: 3px solid #5e1914; color: #5e1914; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; transform: rotate(-5deg); opacity: 0.6; pointer-events: none; border-radius: 4px; margin-top: 30px; margin-bottom: 20px; }
@@ -102,8 +114,8 @@
             <p class="motto">Winners, until they weren't.</p>
             <p class="main-quote">“Most dreams don’t die loudly.<br>They disappear quietly through fear, timing, money, or silence.”</p>
             <div class="btn-row">
-                <button class="outline-btn" onclick="showView('view-submit')">Seal a Record</button>
-                <button class="outline-btn" onclick="showView('view-archive')">The Vault</button>
+                <button class="outline-btn" onclick="navigateTo('view-submit')">Seal a Record</button>
+                <button class="outline-btn" onclick="navigateTo('view-archive')">The Vault</button>
             </div>
         </div>
 
@@ -113,22 +125,38 @@
                 <form id="adminForm">
                     <label>Classification</label>
                     <select id="cat" required>
+                        <option value="" disabled selected>Select Category</option>
                         <option value="Business">Business</option>
                         <option value="Career">Career</option>
                         <option value="Health">Health</option>
                         <option value="Relationship">Relationship</option>
                         <option value="Others">Others</option>
                     </select>
-                    <input type="text" id="dream" placeholder="the Dream" required>
-                    <input type="text" id="decision" placeholder="The Decision" required>
-                    <textarea id="next" placeholder="What Happened Next" rows="2" required></textarea>
-                    <input type="text" id="misjudged" placeholder="Where It Failed" required>
-                    <input type="text" id="cost" placeholder="The Cost" required>
-                    <input type="text" id="misjudged_field" placeholder="The Thing I Misjudged" required>
-                    <input type="text" id="wish" placeholder="One Sentence I Wish I’d Heard Earlier" required>
+                    
+                    <label>The Dream</label>
+                    <input type="text" id="dream" placeholder="e.g. Opening a bookstore" required>
+                    
+                    <label>The Decision</label>
+                    <input type="text" id="decision" placeholder="What was the turning point?" required>
+                    
+                    <label>What Happened Next</label>
+                    <textarea id="next" placeholder="Describe the aftermath..." rows="2" required></textarea>
+                    
+                    <label>Where It Failed</label>
+                    <input type="text" id="misjudged" placeholder="The external factor" required>
+                    
+                    <label>The Cost</label>
+                    <input type="text" id="cost" placeholder="Time, money, or peace?" required>
+                    
+                    <label>The Thing I Misjudged</label>
+                    <input type="text" id="misjudged_field" placeholder="The internal error" required>
+                    
+                    <label>One Sentence I Wish I’d Heard Earlier</label>
+                    <input type="text" id="wish" placeholder="Words of wisdom..." required>
+                    
                     <button type="submit" class="seal-btn" id="submitBtn">Seal the Record</button>
                 </form>
-                <p style="text-align: center; cursor: pointer; text-decoration: underline; margin-top: 20px; color: var(--ink); font-family: 'Courier Prime', monospace; font-size: 0.8rem; font-weight:bold;" onclick="showView('view-home')">BURN_PAGE</p>
+                <p style="text-align: center; cursor: pointer; text-decoration: underline; margin-top: 20px; color: var(--ink); font-family: 'Courier Prime', monospace; font-size: 0.8rem; font-weight:bold;" onclick="navigateTo('view-home')">BURN_PAGE</p>
             </div>
         </div>
 
@@ -146,7 +174,7 @@
             </div>
             <div class="archive-grid" id="grid"></div>
             <div style="text-align: center; margin-top: 40px;">
-                <button class="outline-btn" onclick="showView('view-home')">Exit Vault</button>
+                <button class="outline-btn" onclick="navigateTo('view-home')">Exit Vault</button>
             </div>
         </div>
     </div>
@@ -175,15 +203,39 @@
         let records = [];
         let currentCat = 'All';
 
+        // PC AND MOBILE BACK BUTTON LOGIC
+        window.addEventListener('popstate', function(event) {
+            // If the folder (overlay) is open, close it first
+            if (document.getElementById('dossier-overlay').style.display === 'flex') {
+                document.getElementById('dossier-overlay').style.display = 'none';
+            } 
+            // Then check which main view to show
+            if (event.state && event.state.view) {
+                showView(event.state.view, false);
+            } else {
+                showView('view-home', false);
+            }
+        });
+
+        function navigateTo(id) {
+            showView(id, true);
+        }
+
         async function fetchRecords() {
             const { data, error } = await supabaseClient.from('vault').select('*').eq('is_published', true).order('created_at', { ascending: false });
             if (!error) { records = data; renderFiltered(); }
         }
 
-        function showView(id) {
+        function showView(id, pushState = true) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(id).classList.add('active');
+            
+            if (pushState) {
+                history.pushState({view: id}, "", "");
+            }
+
             if(id === 'view-archive') fetchRecords();
+            window.scrollTo(0,0);
         }
 
         function setFilter(cat, el) {
@@ -216,9 +268,17 @@
                 </div>
             `;
             document.getElementById('dossier-overlay').style.display = 'flex';
+            // Pushes a "state" so the PC back button knows the folder is open
+            history.pushState({overlay: true, view: 'view-archive'}, "", ""); 
         }
 
-        function closeDossier() { document.getElementById('dossier-overlay').style.display = 'none'; }
+        function closeDossier() { 
+            document.getElementById('dossier-overlay').style.display = 'none';
+            // If the user manually clicks "Close," we tell the browser to "go back" one step
+            if (history.state && history.state.overlay) {
+                history.back();
+            }
+        }
 
         document.getElementById('adminForm').onsubmit = async function(e) {
             e.preventDefault();
@@ -234,7 +294,7 @@
                 is_published: false 
             };
             const { error } = await supabaseClient.from('vault').insert([entry]);
-            if (!error) { alert("Submitted for review."); showView('view-home'); this.reset(); }
+            if (!error) { alert("Submitted for review."); navigateTo('view-home'); this.reset(); }
         };
     </script>
 </body>
