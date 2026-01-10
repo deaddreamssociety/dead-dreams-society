@@ -61,7 +61,6 @@
             transform: rotate(var(--rotation, -1deg));
         }
 
-        /* Envelope Top Flap Shadow */
         .archive-card::before {
             content: "";
             position: absolute;
@@ -71,7 +70,6 @@
             border-bottom: 1.5px solid rgba(0,0,0,0.1);
         }
 
-        /* Wax Seal / DPS Detail */
         .archive-card::after {
             content: "●";
             position: absolute;
@@ -92,14 +90,11 @@
         .card-label { color: var(--accent); font-family: 'Courier Prime', monospace; font-size: 0.65rem; text-transform: uppercase; display: block; border-bottom: 1px solid rgba(94, 25, 20, 0.2); width: fit-content; margin-bottom: 10px; }
         .card-title { margin: 5px 0 0 0; font-size: 1.4rem; font-weight: normal; color: #222; font-family: 'EB Garamond', serif; font-style: italic; }
 
-        /* MANUSCRIPT STYLING */
         .manuscript-container { position: relative; max-width: 700px; margin: 0 auto; }
         .manuscript { background: #d2c5b3; color: #111; padding: 60px; box-shadow: 0 0 40px rgba(0,0,0,0.5); background-image: url('https://www.transparenttextures.com/patterns/felt.png'); border-radius: 2px; position: relative; z-index: 1; }
         .manuscript h2 { font-family: 'La Belle Aurore', cursive; font-size: 2.2rem; text-align: center; margin-bottom: 30px; color: var(--accent); }
-        
         .manuscript label { font-family: 'Courier Prime', monospace; font-size: 0.75rem; text-transform: uppercase; color: #000; display: block; margin-top: 15px; font-weight: bold; }
         
-        /* INCREASED OPACITY INPUTS */
         .manuscript input, .manuscript select, .manuscript textarea { 
             width: 100%; background: transparent; border: none; 
             border-bottom: 2px solid rgba(0,0,0,0.8); color: #000; 
@@ -119,7 +114,6 @@
         .seal-btn { margin-top: 30px; width: 100%; padding: 15px; background: var(--accent); color: #fff; border: none; font-family: 'Courier Prime', monospace; text-transform: uppercase; cursor: pointer; letter-spacing: 2px; transition: all 0.3s ease; font-weight: bold; }
         .seal-btn:hover { background: var(--accent-hover); box-shadow: 0 5px 15px rgba(94, 25, 20, 0.4); letter-spacing: 3px; }
 
-        /* STAMP ANIMATION ELEMENTS */
         #big-seal-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             display: none; align-items: center; justify-content: center; 
@@ -144,7 +138,6 @@
         }
         .shake-active { animation: slam-shake 0.3s ease-in-out; }
 
-        /* DOSSIER */
         #dossier-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; display: none; justify-content: center; align-items: center; }
         .dossier-folder { position: relative; width: 90%; max-width: 700px; height: 85vh; display: flex; flex-direction: column; }
         .folder-tab { width: 180px; height: 40px; background-color: var(--folder); border-radius: 10px 40px 0 0; position: absolute; top: -39px; left: 0; display: flex; align-items: center; padding-left: 20px; font-family: 'Courier Prime', monospace; font-size: 0.7rem; color: rgba(0,0,0,0.6); font-weight: bold; border-top: 1px solid rgba(0,0,0,0.1); }
@@ -308,7 +301,6 @@
             const grid = document.getElementById('grid');
             grid.innerHTML = records.filter(i => (currentCat === 'All' || i.cat === currentCat))
                 .map(i => {
-                    // Random rotation between -2 and 2 degrees for DPS aesthetic
                     const rot = (Math.random() * 4 - 2).toFixed(1);
                     return `<div class="archive-card" style="--rotation: ${rot}deg" onclick="openDossier('${i.id}')">
                                 <span class="card-label">${i.cat}</span>
@@ -325,6 +317,8 @@
                 <div class="dossier-entry"><span class="dossier-label">The Decision</span><div class="dossier-text">${i.decision}</div></div>
                 <div class="dossier-entry"><span class="dossier-label">What Happened Next</span><div class="dossier-text">${i.next}</div></div>
                 <div class="dossier-entry"><span class="dossier-label">The Cost</span><div class="dossier-text">${i.cost}</div></div>
+                <div class="dossier-entry"><span class="dossier-label">Where It Failed</span><div class="dossier-text">${i.misjudged}</div></div>
+                <div class="dossier-entry"><span class="dossier-label">The Thing I Misjudged</span><div class="dossier-text">${i.misjudged_field}</div></div>
                 <div style="margin-top:50px; border-top: 1px dashed rgba(0,0,0,0.3); padding-top:20px;">
                     <span class="dossier-label">Final Statement</span>
                     <div class="dossier-text" style="font-style:italic;">"${i.wish}"</div>
