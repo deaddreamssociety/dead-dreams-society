@@ -46,51 +46,114 @@
         .outline-btn { background: rgba(0,0,0,0.5); border: 1px solid #444; color: #ccc; padding: 15px 35px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; cursor: pointer; transition: 0.5s; font-family: 'Courier Prime', monospace; backdrop-filter: blur(2px); }
         .outline-btn:hover { border-color: var(--accent); color: #fff; background: rgba(94, 25, 20, 0.2); }
 
-        .archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; width: 100%; max-width: 1200px; margin: 0 auto; padding-bottom: 50px; }
-        .archive-card { border: 1px solid #222; padding: 20px; background: rgba(15,15,15,0.85); cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
-        .archive-card:hover { border-color: var(--accent); background: rgba(25,25,25,0.95); }
-        .card-label { color: var(--accent); font-family: 'Courier Prime', monospace; font-size: 0.6rem; text-transform: uppercase; display: block; }
-        .card-title { margin: 5px 0 0 0; font-size: 1.3rem; font-weight: normal; color: #ddd; }
+        /* ENVELOPE STYLING FOR VAULT CARDS */
+        .archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 35px; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px 50px 20px; box-sizing: border-box; }
+        
+        .archive-card { 
+            position: relative;
+            background: #c5b08d; 
+            padding: 45px 25px 25px 25px; 
+            cursor: pointer; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            background-image: url('https://www.transparenttextures.com/patterns/felt.png');
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.5);
+            border: 1px solid rgba(0,0,0,0.1);
+            transform: rotate(var(--rotation, -1deg));
+        }
 
-        .manuscript { background: #d2c5b3; color: #111; padding: 60px; max-width: 700px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,0.5); background-image: url('https://www.transparenttextures.com/patterns/felt.png'); border-radius: 2px; }
+        /* Envelope Top Flap Shadow */
+        .archive-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 20px;
+            background: rgba(0,0,0,0.08);
+            border-bottom: 1.5px solid rgba(0,0,0,0.1);
+        }
+
+        /* Wax Seal / DPS Detail */
+        .archive-card::after {
+            content: "●";
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: var(--accent);
+            font-size: 24px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.2);
+            opacity: 0.8;
+        }
+
+        .archive-card:hover { 
+            transform: translateY(-10px) rotate(0deg) scale(1.03); 
+            box-shadow: 12px 12px 30px rgba(0,0,0,0.6);
+            z-index: 5;
+        }
+
+        .card-label { color: var(--accent); font-family: 'Courier Prime', monospace; font-size: 0.65rem; text-transform: uppercase; display: block; border-bottom: 1px solid rgba(94, 25, 20, 0.2); width: fit-content; margin-bottom: 10px; }
+        .card-title { margin: 5px 0 0 0; font-size: 1.4rem; font-weight: normal; color: #222; font-family: 'EB Garamond', serif; font-style: italic; }
+
+        /* MANUSCRIPT STYLING */
+        .manuscript-container { position: relative; max-width: 700px; margin: 0 auto; }
+        .manuscript { background: #d2c5b3; color: #111; padding: 60px; box-shadow: 0 0 40px rgba(0,0,0,0.5); background-image: url('https://www.transparenttextures.com/patterns/felt.png'); border-radius: 2px; position: relative; z-index: 1; }
         .manuscript h2 { font-family: 'La Belle Aurore', cursive; font-size: 2.2rem; text-align: center; margin-bottom: 30px; color: var(--accent); }
         
         .manuscript label { font-family: 'Courier Prime', monospace; font-size: 0.75rem; text-transform: uppercase; color: #000; display: block; margin-top: 15px; font-weight: bold; }
+        
+        /* INCREASED OPACITY INPUTS */
         .manuscript input, .manuscript select, .manuscript textarea { 
             width: 100%; background: transparent; border: none; 
-            border-bottom: 1.5px solid rgba(0,0,0,0.7); color: #000; 
+            border-bottom: 2px solid rgba(0,0,0,0.8); color: #000; 
             padding: 10px 0; font-family: 'EB Garamond', serif; 
-            font-size: 1.2rem; outline: none; margin-bottom: 15px; 
-            opacity: 1; -webkit-appearance: none; appearance: none;
+            font-size: 1.3rem; outline: none; margin-bottom: 15px; 
+            opacity: 1; font-weight: 500; -webkit-appearance: none; appearance: none;
         }
 
-        /* Essential Dropdown Effect */
         .manuscript select {
             background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat; background-position: right center;
             cursor: pointer;
         }
 
-        .manuscript input::placeholder, .manuscript textarea::placeholder { color: rgba(0, 0, 0, 0.5); }
+        .manuscript input::placeholder, .manuscript textarea::placeholder { color: rgba(0, 0, 0, 0.4); font-weight: normal; }
         
         .seal-btn { margin-top: 30px; width: 100%; padding: 15px; background: var(--accent); color: #fff; border: none; font-family: 'Courier Prime', monospace; text-transform: uppercase; cursor: pointer; letter-spacing: 2px; transition: all 0.3s ease; font-weight: bold; }
         .seal-btn:hover { background: var(--accent-hover); box-shadow: 0 5px 15px rgba(94, 25, 20, 0.4); letter-spacing: 3px; }
 
-        #dossier-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100; display: none; justify-content: center; align-items: center; }
+        /* STAMP ANIMATION ELEMENTS */
+        #big-seal-overlay { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            display: none; align-items: center; justify-content: center; 
+            z-index: 100; pointer-events: none; 
+        }
+        .grand-stamp { 
+            border: 12px double var(--accent); color: var(--accent); 
+            padding: 20px 40px; font-family: 'Courier Prime', monospace; 
+            font-weight: bold; font-size: 4rem; text-transform: uppercase; 
+            letter-spacing: 10px; transform: scale(4) rotate(-15deg); 
+            opacity: 0; transition: all 0.15s cubic-bezier(0.18, 0.89, 0.32, 1.28); 
+        }
+        .manuscript-container.stamped .grand-stamp { opacity: 0.8; transform: scale(1) rotate(-15deg); }
+        
+        @keyframes slam-shake {
+            0% { transform: translate(0,0); }
+            20% { transform: translate(-8px, 8px); }
+            40% { transform: translate(8px, -8px); }
+            60% { transform: translate(-8px, -8px); }
+            80% { transform: translate(8px, 8px); }
+            100% { transform: translate(0,0); }
+        }
+        .shake-active { animation: slam-shake 0.3s ease-in-out; }
+
+        /* DOSSIER */
+        #dossier-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; display: none; justify-content: center; align-items: center; }
         .dossier-folder { position: relative; width: 90%; max-width: 700px; height: 85vh; display: flex; flex-direction: column; }
         .folder-tab { width: 180px; height: 40px; background-color: var(--folder); border-radius: 10px 40px 0 0; position: absolute; top: -39px; left: 0; display: flex; align-items: center; padding-left: 20px; font-family: 'Courier Prime', monospace; font-size: 0.7rem; color: rgba(0,0,0,0.6); font-weight: bold; border-top: 1px solid rgba(0,0,0,0.1); }
-
         .dossier-paper { background-color: var(--folder); color: var(--ink); height: 100%; padding: 50px; position: relative; overflow-y: auto; background-image: url('https://www.transparenttextures.com/patterns/felt.png'); font-family: 'Courier Prime', monospace; box-shadow: 0 30px 60px rgba(0,0,0,0.8); border: 1px solid rgba(0,0,0,0.1); border-radius: 0 4px 4px 4px; display: flex; flex-direction: column; }
-        
         .close-dossier { position: absolute; top: 20px; right: 30px; font-size: 0.8rem; cursor: pointer; color: var(--accent); font-weight: bold; border: 1px solid var(--accent); padding: 5px 10px; transition: 0.3s; z-index: 10; }
-        .close-dossier:hover { background: var(--accent); color: #fff; }
-
         .dossier-entry { margin-bottom: 25px; }
         .dossier-label { font-weight: bold; font-size: 0.7rem; text-transform: uppercase; color: rgba(0,0,0,0.5); display: block; margin-bottom: 4px; border-bottom: 1px solid rgba(0,0,0,0.1); width: fit-content; }
         .dossier-text { font-family: 'Courier Prime', monospace; font-size: 1.1rem; color: #111; padding-left: 5px; }
-        
         .dream-text { font-size: 1.155rem !important; font-weight: bold; }
-
         .stamp { align-self: flex-end; width: 120px; height: 50px; border: 3px solid #5e1914; color: #5e1914; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; transform: rotate(-5deg); opacity: 0.6; pointer-events: none; border-radius: 4px; margin-top: 30px; margin-bottom: 20px; }
 
         .dds-footer { flex-shrink: 0; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: transparent; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.3); }
@@ -100,9 +163,9 @@
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; margin-top: 4vh; }
             .manuscript { padding: 30px 20px; width: 90%; box-sizing: border-box; }
+            .grand-stamp { font-size: 2.5rem; letter-spacing: 4px; border-width: 6px; }
             .vault-nav { gap: 15px; }
             .dossier-paper { padding: 30px 20px; }
-            .stamp { width: 100px; font-size: 1rem; height: 40px; }
         }
     </style>
 </head>
@@ -120,43 +183,48 @@
         </div>
 
         <div id="view-submit" class="view">
-            <div class="manuscript">
-                <h2>An Autopsy of Ambition</h2>
-                <form id="adminForm">
-                    <label>Classification</label>
-                    <select id="cat" required>
-                        <option value="" disabled selected>Select Category</option>
-                        <option value="Business">Business</option>
-                        <option value="Career">Career</option>
-                        <option value="Health">Health</option>
-                        <option value="Relationship">Relationship</option>
-                        <option value="Others">Others</option>
-                    </select>
-                    
-                    <label>The Dream</label>
-                    <input type="text" id="dream" placeholder="e.g. Opening a bookstore" required>
-                    
-                    <label>The Decision</label>
-                    <input type="text" id="decision" placeholder="What was the turning point?" required>
-                    
-                    <label>What Happened Next</label>
-                    <textarea id="next" placeholder="Describe the aftermath..." rows="2" required></textarea>
-                    
-                    <label>Where It Failed</label>
-                    <input type="text" id="misjudged" placeholder="The external factor" required>
-                    
-                    <label>The Cost</label>
-                    <input type="text" id="cost" placeholder="Time, money, or peace?" required>
-                    
-                    <label>The Thing I Misjudged</label>
-                    <input type="text" id="misjudged_field" placeholder="The internal error" required>
-                    
-                    <label>One Sentence I Wish I’d Heard Earlier</label>
-                    <input type="text" id="wish" placeholder="Words of wisdom..." required>
-                    
-                    <button type="submit" class="seal-btn" id="submitBtn">Seal the Record</button>
-                </form>
-                <p style="text-align: center; cursor: pointer; text-decoration: underline; margin-top: 20px; color: var(--ink); font-family: 'Courier Prime', monospace; font-size: 0.8rem; font-weight:bold;" onclick="navigateTo('view-home')">BURN_PAGE</p>
+            <div class="manuscript-container" id="m-cont">
+                <div class="manuscript" id="m-page">
+                    <h2>An Autopsy of Ambition</h2>
+                    <form id="adminForm">
+                        <label>Classification</label>
+                        <select id="cat" required>
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Business">Business</option>
+                            <option value="Career">Career</option>
+                            <option value="Health">Health</option>
+                            <option value="Relationship">Relationship</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        
+                        <label>The Dream</label>
+                        <input type="text" id="dream" placeholder="e.g. Opening a bookstore" required>
+                        
+                        <label>The Decision</label>
+                        <input type="text" id="decision" placeholder="What was the turning point?" required>
+                        
+                        <label>What Happened Next</label>
+                        <textarea id="next" placeholder="Describe the aftermath..." rows="2" required></textarea>
+                        
+                        <label>Where It Failed</label>
+                        <input type="text" id="misjudged" placeholder="The external factor" required>
+                        
+                        <label>The Cost</label>
+                        <input type="text" id="cost" placeholder="Time, money, or peace?" required>
+                        
+                        <label>The Thing I Misjudged</label>
+                        <input type="text" id="misjudged_field" placeholder="The internal error" required>
+                        
+                        <label>One Sentence I Wish I’d Heard Earlier</label>
+                        <input type="text" id="wish" placeholder="Words of wisdom..." required>
+                        
+                        <button type="submit" class="seal-btn" id="submitBtn">Seal the Record</button>
+                    </form>
+                    <p style="text-align: center; cursor: pointer; text-decoration: underline; margin-top: 20px; color: var(--ink); font-family: 'Courier Prime', monospace; font-size: 0.8rem; font-weight:bold;" onclick="navigateTo('view-home')">BURN_PAGE</p>
+                </div>
+                <div id="big-seal-overlay">
+                    <div class="grand-stamp">SEALED</div>
+                </div>
             </div>
         </div>
 
@@ -173,7 +241,7 @@
                 </div>
             </div>
             <div class="archive-grid" id="grid"></div>
-            <div style="text-align: center; margin-top: 40px;">
+            <div style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
                 <button class="outline-btn" onclick="navigateTo('view-home')">Exit Vault</button>
             </div>
         </div>
@@ -203,13 +271,10 @@
         let records = [];
         let currentCat = 'All';
 
-        // PC AND MOBILE BACK BUTTON LOGIC
         window.addEventListener('popstate', function(event) {
-            // If the folder (overlay) is open, close it first
             if (document.getElementById('dossier-overlay').style.display === 'flex') {
                 document.getElementById('dossier-overlay').style.display = 'none';
             } 
-            // Then check which main view to show
             if (event.state && event.state.view) {
                 showView(event.state.view, false);
             } else {
@@ -217,9 +282,7 @@
             }
         });
 
-        function navigateTo(id) {
-            showView(id, true);
-        }
+        function navigateTo(id) { showView(id, true); }
 
         async function fetchRecords() {
             const { data, error } = await supabaseClient.from('vault').select('*').eq('is_published', true).order('created_at', { ascending: false });
@@ -229,11 +292,7 @@
         function showView(id, pushState = true) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            
-            if (pushState) {
-                history.pushState({view: id}, "", "");
-            }
-
+            if (pushState) history.pushState({view: id}, "", "");
             if(id === 'view-archive') fetchRecords();
             window.scrollTo(0,0);
         }
@@ -248,7 +307,14 @@
         function renderFiltered() {
             const grid = document.getElementById('grid');
             grid.innerHTML = records.filter(i => (currentCat === 'All' || i.cat === currentCat))
-                .map(i => `<div class="archive-card" onclick="openDossier('${i.id}')"><span class="card-label">${i.cat}</span><h3 class="card-title">${i.dream}</h3></div>`).join('');
+                .map(i => {
+                    // Random rotation between -2 and 2 degrees for DPS aesthetic
+                    const rot = (Math.random() * 4 - 2).toFixed(1);
+                    return `<div class="archive-card" style="--rotation: ${rot}deg" onclick="openDossier('${i.id}')">
+                                <span class="card-label">${i.cat}</span>
+                                <h3 class="card-title">${i.dream}</h3>
+                            </div>`;
+                }).join('');
         }
 
         function openDossier(id) {
@@ -258,43 +324,50 @@
                 <div class="dossier-entry"><span class="dossier-label">The Dream</span><div class="dossier-text dream-text">${i.dream}</div></div>
                 <div class="dossier-entry"><span class="dossier-label">The Decision</span><div class="dossier-text">${i.decision}</div></div>
                 <div class="dossier-entry"><span class="dossier-label">What Happened Next</span><div class="dossier-text">${i.next}</div></div>
-                <div class="dossier-entry"><span class="dossier-label">Where It Failed</span><div class="dossier-text">${i.misjudged}</div></div>
                 <div class="dossier-entry"><span class="dossier-label">The Cost</span><div class="dossier-text">${i.cost}</div></div>
-                <div class="dossier-entry"><span class="dossier-label">The Thing I Misjudged</span><div class="dossier-text">${i.misjudged_field || i.misjudged}</div></div>
-                
                 <div style="margin-top:50px; border-top: 1px dashed rgba(0,0,0,0.3); padding-top:20px;">
                     <span class="dossier-label">Final Statement</span>
                     <div class="dossier-text" style="font-style:italic;">"${i.wish}"</div>
                 </div>
             `;
             document.getElementById('dossier-overlay').style.display = 'flex';
-            // Pushes a "state" so the PC back button knows the folder is open
             history.pushState({overlay: true, view: 'view-archive'}, "", ""); 
         }
 
         function closeDossier() { 
             document.getElementById('dossier-overlay').style.display = 'none';
-            // If the user manually clicks "Close," we tell the browser to "go back" one step
-            if (history.state && history.state.overlay) {
-                history.back();
-            }
+            if (history.state && history.state.overlay) history.back();
         }
 
         document.getElementById('adminForm').onsubmit = async function(e) {
             e.preventDefault();
             const entry = { 
-                cat: document.getElementById('cat').value, 
-                dream: document.getElementById('dream').value, 
-                decision: document.getElementById('decision').value, 
-                next: document.getElementById('next').value, 
-                cost: document.getElementById('cost').value, 
-                misjudged: document.getElementById('misjudged').value, 
-                misjudged_field: document.getElementById('misjudged_field').value, 
-                wish: document.getElementById('wish').value, 
+                cat: document.getElementById('cat').value, dream: document.getElementById('dream').value, 
+                decision: document.getElementById('decision').value, next: document.getElementById('next').value, 
+                cost: document.getElementById('cost').value, misjudged: document.getElementById('misjudged').value, 
+                misjudged_field: document.getElementById('misjudged_field').value, wish: document.getElementById('wish').value, 
                 is_published: false 
             };
             const { error } = await supabaseClient.from('vault').insert([entry]);
-            if (!error) { alert("Submitted for review."); navigateTo('view-home'); this.reset(); }
+            if (!error) {
+                const container = document.getElementById('m-cont');
+                const overlay = document.getElementById('big-seal-overlay');
+                overlay.style.display = 'flex';
+                setTimeout(() => {
+                    container.classList.add('stamped', 'shake-active');
+                    setTimeout(() => {
+                        container.style.opacity = '0';
+                        container.style.transition = 'opacity 1s ease';
+                        setTimeout(() => {
+                            container.style.opacity = '1';
+                            container.classList.remove('stamped', 'shake-active');
+                            overlay.style.display = 'none';
+                            this.reset();
+                            navigateTo('view-home');
+                        }, 1000);
+                    }, 2000);
+                }, 50);
+            }
         };
     </script>
 </body>
