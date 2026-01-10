@@ -90,8 +90,8 @@
         .card-label { color: var(--accent); font-family: 'Courier Prime', monospace; font-size: 0.65rem; text-transform: uppercase; display: block; border-bottom: 1px solid rgba(94, 25, 20, 0.2); width: fit-content; margin-bottom: 10px; }
         .card-title { margin: 5px 0 0 0; font-size: 1.4rem; font-weight: normal; color: #222; font-family: 'EB Garamond', serif; font-style: italic; }
 
-        .manuscript-container { position: relative; max-width: 700px; margin: 0 auto; }
-        .manuscript { background: #d2c5b3; color: #111; padding: 60px; box-shadow: 0 0 40px rgba(0,0,0,0.5); background-image: url('https://www.transparenttextures.com/patterns/felt.png'); border-radius: 2px; position: relative; z-index: 1; }
+        .manuscript-container { position: relative; max-width: 700px; width: 100%; margin: 0 auto; display: flex; justify-content: center; }
+        .manuscript { background: #d2c5b3; color: #111; padding: 60px; box-shadow: 0 0 40px rgba(0,0,0,0.5); background-image: url('https://www.transparenttextures.com/patterns/felt.png'); border-radius: 2px; position: relative; z-index: 1; width: 100%; margin: 0 20px; box-sizing: border-box; }
         .manuscript h2 { font-family: 'La Belle Aurore', cursive; font-size: 2.2rem; text-align: center; margin-bottom: 30px; color: var(--accent); }
         .manuscript label { font-family: 'Courier Prime', monospace; font-size: 0.75rem; text-transform: uppercase; color: #000; display: block; margin-top: 15px; font-weight: bold; }
         
@@ -155,7 +155,7 @@
 
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; margin-top: 4vh; }
-            .manuscript { padding: 30px 20px; width: 90%; box-sizing: border-box; }
+            .manuscript { padding: 30px 20px; width: 90%; margin: 0 auto; box-sizing: border-box; }
             .grand-stamp { font-size: 2.5rem; letter-spacing: 4px; border-width: 6px; }
             .vault-nav { gap: 15px; }
             .dossier-paper { padding: 30px 20px; }
